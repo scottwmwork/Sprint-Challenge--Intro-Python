@@ -27,8 +27,9 @@ class FlightVehicle(Vehicle):
 	def __init__(self):
 		super().__init__()
 
-class Starship(Vehicle):
-	pass
+class Starship(FlightVehicle):
+	def __init__(self):
+		super().__init__()
 
 class Airplane(FlightVehicle):
 	def __init__(self):
