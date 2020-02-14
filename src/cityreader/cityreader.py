@@ -79,47 +79,48 @@ for c in cities:
 # Tucson: (32.1558,-110.8777)
 # Salt Lake City: (40.7774,-111.9301)
 
-# TODO Get latitude and longitude values from the user
+# Get latitude and longitude values from the user
+
+location1 = input("Enter in lat1,lon1: ")
+location1 = location1.split(',')
+location1 = [float(location1[0]), float(location1[1])]
+location2  = input("Enter in lat2,lon2: ")
+location2 = location2.split(',')
+location2 = [float(location2[0]), float(location2[0])]
+
 
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # within will hold the cities that fall within the specified region
   within = []
 
-  latitude_list = []
-  longitude_list = []
-
-  # Used to determine which latitude value is greater: index 0 is greater than index 1
+  lat_list = []
+  lon_list = []
+  # find the greater of the two values for both latitude and longitude
   if lat1 > lat2:
-      latitude_list.append(lat1) 
-      latitude_list.append(lat2)
+    print("lat1 > lat2")
+    lat_list.append(lat1)
+    lat_list.append(lat2)
   else:
-      latitude_list.append(lat2)
-      latitude_list.append(lat1)      
-
-  # Used to determine which longitude value is greater: index 0 is greater than index 1
+    print("lat2 > lat1")
+    lat_list.append(lat2)
+    lat_list.append(lat1)
   if lon1 > lon2:
-      longitude_list.append(lon1)
-      longitude_list.append(lon2)
+    print("lon1 > lon2")
+    lon_list.append(lon1)
+    lon_list.append(lon2)
   else:
-      latitude_list.append(lon2)
-      latitude_list.append(lon1)   
-
-
-  # TODO Ensure that the lat and lon valuse are all floats
-  # Go through each city and check to see if it falls within 
-  # the specified coordinates.
+    print("lon2 > lon1")
+    lon_list.append(lon2)
+    lon_list.append(lon1)
 
   for city in cities:
-    if float(city.lat) > latitude_list[1] and float(city.lat) < latitude_list[0]:
-      if float(city.lon) > longitude_list[1] and float(city.lon) < longitude_list[0]: 
-        within.append(city)
+    # Case str to float
+    lat = float(city.lat)
+    lon = float(city.lon)
+    if lon >= lon_list[1] and lon <= lon_list[0]:
+      if lat >= lat_list[1] and lat <= lat_list[0]:
+          within.append(city)
 
   return within
-
-location1 = input("Enter in lat1,lon1: ")
-location1.split(',')
-location1 = [float(location1[0]), float(location1[1])]
-location2  = input("Enter in lat2,lon2: ")
-location2 = [float(location2[0]), float(location2[0])]
 
 print(cityreader_stretch(location1[0], location1[1], location2[0], location2[1], cities))
